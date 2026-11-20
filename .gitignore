@@ -1,0 +1,15 @@
+.env
+**/.env
+**/config.properties
+*.pem
+*.key
+**/venv/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/target/
+.idea/
+.vscode/
+*.log
+*.sql.bak
+

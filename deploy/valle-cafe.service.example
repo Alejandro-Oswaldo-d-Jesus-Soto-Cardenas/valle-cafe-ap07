@@ -1,0 +1,16 @@
+[Unit]
+Description=Valle Cafe Flask Web (AP07)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/valle-cafe-ap07/web
+EnvironmentFile=/home/ubuntu/valle-cafe-ap07/web/.env
+ExecStart=/home/ubuntu/valle-cafe-ap07/web/.venv/bin/gunicorn --workers 2 --bind 0.0.0.0:5000 app:app
+Restart=on-failure
+RestartSec=4
+
+[Install]
+WantedBy=multi-user.target

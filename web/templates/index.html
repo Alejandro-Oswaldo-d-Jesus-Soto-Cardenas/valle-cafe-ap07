@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b2c23">
+  <meta name="description" content="Valle Café: café de especialidad, bebidas frías, repostería y pedidos en línea.">
+  <title>Valle Café — Un buen día empieza aquí</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='store.css') }}">
+  <script src="{{ url_for('static', filename='store.js') }}" defer></script>
+</head>
+<body class="storefront">
+  <div class="announcement">☀️ Un pequeño ritual, un gran día. <a href="#menu">Descubre nuestro menú <span aria-hidden="true">↗</span></a></div>
+  <header class="store-header">
+    <div class="store-container header-inner">
+      <a class="brand" href="/" aria-label="Valle Café, inicio"><span class="brand-symbol">✳</span><span>VALLE<span>CAFÉ</span><small>COFFEE HOUSE</small></span></a>
+      <nav class="store-nav" aria-label="Navegación principal"><a href="#inicio">Inicio</a><a href="#menu">Nuestro menú</a><a href="#historia">Nuestra esencia</a><a href="#experiencia">Experiencia</a></nav>
+      <div class="header-actions"><a href="#menu" class="nav-order">Pedir ahora ↗</a><button class="cart-trigger" id="openCart" aria-label="Abrir mi pedido">🛍 <span id="cartCount">0</span></button><button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="store-hero" id="inicio"><div class="store-container store-hero-grid">
+      <div class="hero-copy"><span class="store-eyebrow"><span class="sparkle">✦</span> CAFÉ HECHO PARA DISFRUTAR</span><h1>Hay días que<br>merecen <em>un gran café.</em></h1><p>Tu próxima pausa favorita está aquí. Descubre bebidas hechas con cariño, sabores que inspiran y momentos que se quedan contigo.</p><div class="hero-ctas"><a class="store-button gold-button" href="#menu">Explorar el menú <span>↗</span></a><a class="discover-link" href="#historia">Conoce nuestra historia <span>↗</span></a></div><div class="hero-social"><span class="avatars">☕ ✨ ♡</span><span>Hecho para compartir buenos momentos.</span></div></div>
+      <div class="hero-visual"><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div><div class="visual-label top-label">✦ Tostado con pasión</div><div class="coffee-art"><span class="cup-steam">〰 〰 〰</span><span class="cup-body"><span class="coffee-surface">✳</span><span class="cup-brand">V</span></span><span class="cup-handle"></span><span class="cup-saucer"></span></div><div class="visual-label bottom-label"><strong>01 / 04</strong><span>Tu momento favorito</span></div><span class="visual-decoration">✳</span></div>
+    </div><div class="hero-bottom store-container"><span>DESDE EL PRIMER SORBO</span><span class="hero-scroll">DESCUBRE MÁS ↓</span><span>HECHO CON AMOR ♡</span></div></section>
+
+    <div class="marquee-strip" aria-hidden="true"><div>CAFÉ DE ESPECIALIDAD <span>✳</span> MOMENTOS QUE INSPIRAN <span>✳</span> BUEN CAFÉ, BUENA ENERGÍA <span>✳</span> CAFÉ DE ESPECIALIDAD <span>✳</span> MOMENTOS QUE INSPIRAN <span>✳</span></div></div>
+
+    <section class="store-section categories-section" id="menu"><div class="store-container">
+      <div class="store-section-heading"><div><span class="store-eyebrow green">SELECCIONADOS PARA TI</span><h2>El antojo perfecto<br><em>está en nuestro menú.</em></h2></div><p>Desde clásicos reconfortantes hasta nuevas obsesiones. Encuentra el sabor que va contigo.</p></div>
+      <div class="category-pills" role="group" aria-label="Filtrar menú"><button class="category-pill active" data-filter="Todos">✳ Todos</button><button class="category-pill" data-filter="Calientes">☕ Cafés calientes</button><button class="category-pill" data-filter="Fríos">🧊 Bebidas frías</button><button class="category-pill" data-filter="Panadería">🥐 Algo para acompañar</button></div>
+      <div class="products-grid" id="productsGrid">
+        {% for item in menu %}
+        <article class="product-card" data-category="{{ item.categoria }}">
+          <div class="product-picture picture-{{ item.tono }}"><span class="product-tag">{{ item.etiqueta }}</span><span class="product-illustration" aria-hidden="true">{{ item.icono }}</span><span class="product-picture-text">VALLE CAFÉ</span></div>
+          <div class="product-info"><div class="product-topline"><span>{{ item.categoria }}</span><span>★ 4.9</span></div><h3>{{ item.nombre }}</h3><p>{{ item.descripcion }}</p><div class="product-bottom"><strong>S/ {{ '%.2f'|format(item.precio) }}</strong><button class="add-product" data-id="{{ item.id }}" aria-label="Agregar {{ item.nombre }} al pedido">+ Agregar</button></div></div>
+        </article>
+        {% endfor %}
+      </div>
+      <p class="menu-note">✦ Precios referenciales en soles. Tu pedido se registra al confirmar.</p>
+    </div></section>
+
+    <section class="story-section" id="historia"><div class="store-container story-grid"><div class="story-art"><div class="story-canvas"><span class="story-stamp">VALLE<br>CAFÉ <span>✳</span></span><div class="story-emoji">🌱</div><div class="story-caption">Un origen especial.<br>Un sabor inolvidable.</div></div><span class="floating-note">✦ Siempre recién preparado</span></div><div class="story-copy"><span class="store-eyebrow green">MÁS QUE UNA TAZA</span><h2>Una pausa para<br><em>volver a conectar.</em></h2><p>Creemos que el café es mucho más que una bebida. Es una conversación pendiente, una idea que comienza y ese momento de calma que todos merecemos.</p><p>En Valle Café celebramos los pequeños placeres de cada día con bebidas cuidadosamente preparadas y el sabor de sentirte en casa.</p><a class="store-button dark-button" href="#menu">Encuentra tu favorito ↗</a><div class="story-values"><div><strong>✦</strong><span>Preparado<br>con dedicación</span></div><div><strong>♡</strong><span>Momentos<br>para compartir</span></div><div><strong>☕</strong><span>Siempre<br>tu mejor pausa</span></div></div></div></div></section>
+
+    <section class="feature-band" id="experiencia"><div class="store-container feature-layout"><div><span class="store-eyebrow">NUESTRA EXPERIENCIA</span><h2>Tu café favorito,<br><em>a tu manera.</em></h2></div><div class="feature-list"><div><span>01</span><div><h3>Elige lo que te encanta</h3><p>Explora nuestras bebidas y acompañamientos.</p></div><span>↗</span></div><div><span>02</span><div><h3>Arma tu pedido</h3><p>Agrega tus favoritos al carrito y revisa el total.</p></div><span>↗</span></div><div><span>03</span><div><h3>Nosotros nos encargamos</h3><p>Registra el pedido y consulta su estado con tu correo.</p></div><span>↗</span></div></div></div></section>
+
+    <section class="track-section"><div class="store-container track-grid"><div><span class="store-eyebrow green">¿YA HICISTE TU PEDIDO?</span><h2>Sigue el estado de<br><em>tu momento favorito.</em></h2><p>Consulta el progreso de tus pedidos usando el correo y teléfono con los que te registraste.</p></div><form id="trackingForm" class="tracking-box"><label for="trackingEmail">Tu correo electrónico</label><input id="trackingEmail" name="correo" type="email" placeholder="nombre@correo.com" autocomplete="email" required><label for="trackingPhone">Tu teléfono</label><input id="trackingPhone" name="telefono" type="tel" maxlength="25" placeholder="999 999 999" autocomplete="tel" required><div class="tracking-input" style="margin-top:14px"><button type="submit" style="min-height:44px;width:100%">Consultar mis pedidos ↗</button></div><div class="tracking-result" id="trackingResult" aria-live="polite"></div></form></div></section>
+
+    <section class="newsletter-band"><div class="store-container newsletter-inner"><span class="newsletter-star">✳</span><div><span class="store-eyebrow">UN POCO DE FELICIDAD</span><h2>Todo sabe mejor<br><em>con un buen café.</em></h2></div><a class="store-button gold-button" href="#menu">Haz tu pedido hoy ↗</a></div></section>
+  </main>
+
+  <footer class="store-footer"><div class="store-container"><div class="footer-main"><div><a class="brand" href="#inicio"><span class="brand-symbol">✳</span><span>VALLE<span>CAFÉ</span><small>COFFEE HOUSE</small></span></a><p>Un lugar para detenerte, sonreír y disfrutar lo mejor de cada día.</p></div><div><h4>Explora</h4><a href="#inicio">Inicio</a><a href="#menu">Nuestro menú</a><a href="#historia">Nuestra historia</a></div><div><h4>Tu pedido</h4><a href="#menu">Pedir en línea</a><a href="#experiencia">Cómo funciona</a><a href="#trackingEmail">Consultar pedido</a></div><div><h4>Valle Café</h4><p>Una experiencia digital de cafetería<br>Proyecto académico AP07</p></div></div><div class="footer-bottom"><span>© Valle Café 2026. Hecho con ♡ y mucho café.</span><span>Flask · Java · AWS RDS</span></div></div></footer>
+
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Tu pedido" aria-hidden="true"><div class="cart-heading"><div><span class="store-eyebrow green">LISTO PARA DISFRUTAR</span><h2>Tu pedido <span id="drawerCount">(0)</span></h2></div><button class="icon-button" id="closeCart" aria-label="Cerrar pedido">✕</button></div><div class="cart-content" id="cartItems"></div><div class="cart-summary"><div class="cart-total"><span>Total estimado</span><strong id="cartTotal">S/ 0.00</strong></div><button class="store-button dark-button full" id="checkoutButton">Continuar con mi pedido ↗</button><p>Se solicitarán tus datos para registrar el pedido.</p></div></aside>
+
+  <dialog id="checkoutDialog" class="checkout-dialog"><button class="checkout-close icon-button" id="closeCheckout" aria-label="Cerrar">✕</button><span class="store-eyebrow green">YA CASI ES TUYO</span><h2>Un café más cerca<br><em>de un gran día.</em></h2><p>Completa tus datos para registrar tu pedido. No se realiza ningún cobro en línea.</p><form id="checkoutForm"><label>Nombre completo<input name="nombre" autocomplete="name" maxlength="100" required placeholder="Tu nombre"></label><label>Correo electrónico<input name="correo" type="email" autocomplete="email" maxlength="120" required placeholder="tucorreo@ejemplo.com"></label><label>Teléfono<input name="telefono" type="tel" autocomplete="tel" maxlength="25" required placeholder="999 999 999"></label><div class="checkout-total"><span>Total del pedido</span><strong id="checkoutTotal">S/ 0.00</strong></div><button class="store-button dark-button full" type="submit" id="confirmOrder">Confirmar pedido ↗</button><div id="checkoutMessage" class="checkout-message" aria-live="polite"></div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script id="menu-data" type="application/json">{{ menu|tojson }}</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Copiar como config.properties (nunca subir el archivo real al repositorio).
+ssh.host=IP_PUBLICA_EC2
+ssh.port=22
+ssh.user=ubuntu
+ssh.privateKey=C:/Users/TU_USUARIO/Documents/KeyUb.pem
+ssh.knownHosts=C:/Users/TU_USUARIO/.ssh/known_hosts
+rds.host=ENDPOINT_PRIVADO_RDS
+rds.port=3306
+local.port=3308
+db.name=valle_cafe
+db.user=app_desktop
+# Se solicitará la contraseña al iniciar; opcional solo en entorno local:
+# db.password=CONTRASENA_NO_VERSIONADA
